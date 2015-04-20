@@ -214,8 +214,11 @@ profit.over60double.draw <- sum(over60double.games.more.than.one.draw$WonAmount)
 odds.better.than.risk<- strategy[strategy$'predict.data.home$yes'>0.68 & (predict.data.home$yes-(1/strategy$BbAvH))>0 ,]
 odds.better.than.risk$WonAmount <- 50*ifelse(odds.better.than.risk$HomeFlag=='yes',1,0)*odds.better.than.risk$BbAvH
 profit.odds.better.than.risk  <- sum(odds.better.than.risk$WonAmount)-length(odds.better.than.risk$WonAmount)*50
+win.ratio <- sum(ifelse(odds.better.than.risk$HomeFlag=='yes',1,0))/length(ifelse(odds.better.than.risk$HomeFlag=='yes',1,0))
 
 #Test strategy with model probability overgoing odds and probability over 0.5
-odds.better.than.risk<- strategy[strategy$'predict.data.away$yes'>0.39 & (strategy$'predict.data.away$yes'-(1/strategy$BbAvA))>0 ,]
+odds.better.than.risk<- strategy[strategy$'predict.data.away$yes'>0.4 & (predict.data.away$yes-(1/strategy$BbAvH))>-0.2 ,]
 odds.better.than.risk$WonAmount <- 50*ifelse(odds.better.than.risk$AwayFlag=='yes',1,0)*odds.better.than.risk$BbAvA
 profit.odds.better.than.risk  <- sum(odds.better.than.risk$WonAmount)-length(odds.better.than.risk$WonAmount)*50  
+win.ratio <- sum(ifelse(odds.better.than.risk$AwayFlag=='yes',1,0))/length(ifelse(odds.better.than.risk$AwayFlag=='yes',1,0))
+
